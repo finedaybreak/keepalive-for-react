@@ -1,11 +1,11 @@
 {
     "name": "keepalive-for-react-router",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "React Router integration for keepalive-for-react",
-    "homepage": "https://github.com/irychen/keepalive-for-react",
+    "homepage": "https://github.com/finedaybreak/keepalive-for-react",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/irychen/keepalive-for-react.git"
+        "url": "git+https://github.com/finedaybreak/keepalive-for-react.git"
     },
     "exports": {
         ".": {

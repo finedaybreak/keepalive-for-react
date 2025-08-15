@@ -119,7 +119,7 @@ function Layout() {
 
 details see [examples/react-router-dom-simple-starter](./examples/react-router-dom-simple-starter)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/irychen/keepalive-for-react/tree/main/examples/react-router-dom-simple-starter)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/finedaybreak/keepalive-for-react/tree/main/examples/react-router-dom-simple-starter)
 
 ### in simple tabs
 
@@ -166,7 +166,7 @@ function App() {
 
 details see [examples/simple-tabs-starter](./examples/simple-tabs-starter)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/irychen/keepalive-for-react/tree/main/examples/simple-tabs-starter)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/finedaybreak/keepalive-for-react/tree/main/examples/simple-tabs-starter)
 
 ## KeepAlive Props
 

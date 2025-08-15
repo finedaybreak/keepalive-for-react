@@ -115,7 +115,7 @@ function Layout() {
 
 详情请参见 [examples/react-router-dom-simple-starter](./examples/react-router-dom-simple-starter)
 
-[![在StackBlitz中打开](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/irychen/keepalive-for-react/tree/main/examples/react-router-dom-simple-starter)
+[![在StackBlitz中打开](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/finedaybreak/keepalive-for-react/tree/main/examples/react-router-dom-simple-starter)
 
 ### 在简单标签页中
 
@@ -162,7 +162,7 @@ function App() {
 
 详情请参见 [examples/simple-tabs-starter](./examples/simple-tabs-starter)
 
-[![在StackBlitz中打开](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/irychen/keepalive-for-react/tree/main/examples/simple-tabs-starter)
+[![在StackBlitz中打开](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/finedaybreak/keepalive-for-react/tree/main/examples/simple-tabs-starter)
 
 ## KeepAlive 属性
 

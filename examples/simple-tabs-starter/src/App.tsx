@@ -79,8 +79,8 @@ function Tab1() {
             </div>
             <div className=" mt-[20px] text-[12px] text-center">
                 {"Github: "}
-                <a className="text-gray-500" target="_blank" href="https://github.com/irychen/keepalive-for-react">
-                    {"https://github.com/irychen/keepalive-for-react"}
+                <a className="text-gray-500" target="_blank" href="https://github.com/finedaybreak/keepalive-for-react">
+                    {"https://github.com/finedaybreak/keepalive-for-react"}
                 </a>
             </div>
         </div>

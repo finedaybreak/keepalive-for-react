@@ -35,8 +35,8 @@ function Home() {
             </code>
             <div className=" mt-[30px]">
                 {"Github: "}
-                <a className="text-blue-500" target="_blank" href="https://github.com/irychen/keepalive-for-react">
-                    {"https://github.com/irychen/keepalive-for-react"}
+                <a className="text-blue-500" target="_blank" href="https://github.com/finedaybreak/keepalive-for-react">
+                    {"https://github.com/finedaybreak/keepalive-for-react"}
                 </a>
             </div>
             <div className="min-h-[600px]"></div>

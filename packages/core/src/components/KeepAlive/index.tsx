@@ -15,7 +15,7 @@ import CacheComponentProvider from "../CacheComponentProvider";
 import CacheComponent from "../CacheComponent";
 import safeStartTransition from "../../compat/safeStartTransition";
 
-export type KeepAliveChildren = ReactNode | ReactElement | null | undefined | JSX.Element;
+export type KeepAliveChildren = ReactNode | ReactElement | null | undefined;
 
 export interface KeepAliveProps {
     activeCacheKey: string;
@@ -99,7 +99,7 @@ export interface KeepAliveAPI {
 export interface KeepAliveRef extends KeepAliveAPI {}
 
 export function useKeepAliveRef() {
-    return useRef<KeepAliveRef>();
+    return useRef<KeepAliveRef>(null);
 }
 
 function KeepAlive(props: KeepAliveProps) {

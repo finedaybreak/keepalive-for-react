@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useEffectOnActive, useKeepAliveContext, KeepAlive } from "keepalive-for-react";
+import useCounterStore from "./store/counter-store";
 
 const tabs = [
     {
@@ -54,6 +55,11 @@ function App() {
 function Tab1() {
     const [text, setText] = useState("Hello KeepAlive for React");
     const { refresh } = useKeepAliveContext();
+    const { count, increment, decrement } = useCounterStore();
+
+    useEffect(() => {
+        console.log("Tab1 count", count);
+    }, [count]);
     return (
         <div className="p-[20px]">
             <div className="text-center text-lg font-bold">Tab1</div>
@@ -77,6 +83,17 @@ function Tab1() {
                     Clear
                 </button>
             </div>
+            {/* shared counter */}
+            <div className="text-center text-lg font-bold my-[10px]">Shared Counter</div>
+            <div className="text-center text-xl py-[10px] rounded-md bg-neutral-50 p-[10px]">{count}</div>
+            <div className="flex gap-4 justify-center mt-[20px] text-[14px] mb-[20px]">
+                <button onClick={() => increment()} className="btn bg-blue-500 active:bg-blue-600 px-4 py-2 rounded-md text-white">
+                    Increase
+                </button>
+                <button onClick={() => decrement()} className="btn bg-red-500 active:bg-red-600 px-4 py-2 rounded-md text-white">
+                    Decrease
+                </button>
+            </div>
             <div className=" mt-[20px] text-[12px] text-center">
                 {"Github: "}
                 <a className="text-gray-500" target="_blank" href="https://github.com/finedaybreak/keepalive-for-react">
@@ -90,10 +107,15 @@ function Tab1() {
 function Tab2() {
     const [count, setCount] = useState(0);
     const { refresh, active } = useKeepAliveContext();
+    const { count: sharedCount, increment: sharedIncrement, decrement: sharedDecrement } = useCounterStore();
 
     useEffectOnActive(() => {
         console.log("Tab2 Counter is active", count);
     }, [count]);
+
+    useEffect(() => {
+        console.log("Tab2 sharedCount", sharedCount);
+    }, [sharedCount]);
     return (
         <div className="p-[20px]">
             <div className="text-center text-lg font-bold mb-[10px]">Tab2</div>
@@ -118,6 +140,17 @@ function Tab2() {
                 </button>
                 <button className="px-[10px] py-[5px] bg-green-500 active:bg-green-600 text-white rounded-md" onClick={() => refresh()}>
                     Refresh
+                </button>
+            </div>
+            {/* shared counter */}
+            <div className="text-center text-lg font-bold my-[10px]">Shared Counter</div>
+            <div className="text-center text-xl py-[10px] rounded-md bg-neutral-50 p-[10px]">{sharedCount}</div>
+            <div className="flex gap-4 justify-center mt-[20px] text-[14px] mb-[20px]">
+                <button onClick={() => sharedIncrement()} className="btn bg-blue-500 active:bg-blue-600 px-4 py-2 rounded-md text-white">
+                    Increase
+                </button>
+                <button onClick={() => sharedDecrement()} className="btn bg-red-500 active:bg-red-600 px-4 py-2 rounded-md text-white">
+                    Decrease
                 </button>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { ComponentType, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef } from "react";
+import { ComponentType, Activity, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { delayAsync, domAttrSet, isInclude } from "../../utils";
 
@@ -7,7 +7,7 @@ export interface CacheComponentProps {
     errorElement?: ComponentType<{
         children: ReactNode;
     }>;
-    containerDivRef: RefObject<HTMLDivElement>;
+    containerDivRef: RefObject<HTMLDivElement | null>;
     cacheNodeClassName: string;
     renderCount: number;
     active: boolean;
@@ -133,7 +133,15 @@ const CacheComponent = memo(
             }
         }, [active, containerDivRef, cacheKey, exclude, include]);
 
-        return activatedRef.current ? createPortal(<ErrorBoundary>{children}</ErrorBoundary>, cacheDiv, cacheKey) : null;
+        return activatedRef.current
+            ? createPortal(
+                  <ErrorBoundary>
+                      <Activity mode={active ? "visible" : "hidden"}>{children}</Activity>
+                  </ErrorBoundary>,
+                  cacheDiv,
+                  cacheKey,
+              )
+            : null;
     },
     (prevProps, nextProps) => {
         return (

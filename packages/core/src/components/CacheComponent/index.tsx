@@ -1,4 +1,4 @@
-import { ComponentType, Activity, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef } from "react";
+import { ComponentType, Activity, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef, useLayoutEffect } from "react";
 import { createPortal } from "react-dom";
 import { delayAsync, domAttrSet, isInclude } from "../../utils";
 
@@ -18,6 +18,7 @@ export interface CacheComponentProps {
     exclude?: Array<string | RegExp> | string | RegExp;
     include?: Array<string | RegExp> | string | RegExp;
     destroy: (cacheKey: string | string[]) => Promise<void>;
+    activityChildrenContainerClassName: string;
 }
 
 const cacheDivMarkedClassName = "keepalive-cache-div";
@@ -70,7 +71,8 @@ function isCached(
 const CacheComponent = memo(
     function (props: CacheComponentProps): any {
         const { errorElement: ErrorBoundary = Fragment, cacheNodeClassName, children, cacheKey, exclude, include } = props;
-        const { active, renderCount, destroy, transition, viewTransition, duration, containerDivRef } = props;
+        const { active, renderCount, destroy, transition, viewTransition, duration, containerDivRef, activityChildrenContainerClassName } =
+            props;
         const activatedRef = useRef(false);
 
         activatedRef.current = activatedRef.current || active;
@@ -136,7 +138,9 @@ const CacheComponent = memo(
         return activatedRef.current
             ? createPortal(
                   <ErrorBoundary>
-                      <Activity mode={active ? "visible" : "hidden"}>{children}</Activity>
+                      <Activity mode={active ? "visible" : "hidden"}>
+                          <ActivityChildrenContainer className={activityChildrenContainerClassName}>{children}</ActivityChildrenContainer>
+                      </Activity>
                   </ErrorBoundary>,
                   cacheDiv,
                   cacheKey,
@@ -153,5 +157,34 @@ const CacheComponent = memo(
         );
     },
 );
+
+function ActivityChildrenContainer({ children, className }: { children: ReactNode; className: string }) {
+    const divRef = useRef<HTMLDivElement>(null);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    // 监听divRef style变化 主要是防止Activity组件的display属性被设置为none
+    useLayoutEffect(() => {
+        const dom = divRef.current;
+        if (dom) {
+            const observer = new MutationObserver(() => {
+                dom.style.display = "block";
+            });
+            observer.observe(dom, { attributes: true });
+            return () => {
+                if (timerRef.current) {
+                    clearTimeout(timerRef.current);
+                }
+                timerRef.current = setTimeout(() => {
+                    observer.disconnect();
+                    timerRef.current = null;
+                }, 100);
+            };
+        }
+    }, []);
+    return (
+        <div className={className} ref={divRef} style={{ height: "100%" }}>
+            {children}
+        </div>
+    );
+}
 
 export default CacheComponent;

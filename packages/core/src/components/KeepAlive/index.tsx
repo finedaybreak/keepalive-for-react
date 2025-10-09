@@ -30,6 +30,7 @@ export interface KeepAliveProps {
     customContainerRef?: RefObject<HTMLDivElement>;
     cacheNodeClassName?: string;
     containerClassName?: string;
+    activityChildrenContainerClassName?: string;
     errorElement?: ComponentType<{
         children: ReactNode;
     }>;
@@ -112,6 +113,7 @@ function KeepAlive(props: KeepAliveProps) {
         customContainerRef,
         cacheNodeClassName = `cache-component`,
         containerClassName = "keep-alive-render",
+        activityChildrenContainerClassName = "activity-children-container",
         errorElement,
         transition = false,
         viewTransition = false,
@@ -265,6 +267,7 @@ function KeepAlive(props: KeepAliveProps) {
                             errorElement={errorElement}
                             active={activeCacheKey === cacheKey}
                             cacheNodeClassName={cacheNodeClassName}
+                            activityChildrenContainerClassName={activityChildrenContainerClassName}
                             cacheKey={cacheKey}
                         >
                             {ele}

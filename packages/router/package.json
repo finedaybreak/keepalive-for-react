@@ -52,7 +52,7 @@
     "author": "wongyichen",
     "license": "MIT",
     "peerDependencies": {
-        "keepalive-for-react": "^4.0.0",
+        "keepalive-for-react": "^5.0.0",
         "react": ">=19.2.0",
         "react-dom": ">=19.2.0",
         "react-router": ">=7.0.0"

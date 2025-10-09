@@ -1,6 +1,6 @@
 {
     "name": "keepalive-for-react",
-    "version": "4.0.3",
+    "version": "5.0.1",
     "description": "A react <KeepAlive/> component like <keep-alive/> in vue",
     "homepage": "https://github.com/finedaybreak/keepalive-for-react",
     "repository": {

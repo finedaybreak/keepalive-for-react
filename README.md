@@ -24,13 +24,14 @@
 ## Features
 
 -   Support react-router-dom v6+ or react-router v7+
--   Support React v16+ ~ v18+
+-   Support React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
 -   Support Suspense and Lazy import
 -   Support ErrorBoundary
 -   Support Custom Container
 -   Support Switching Animation Transition with className `active` and `inactive`
 -   Simply implement, without any extra dependencies and hacking ways
 -   Only 6KB minified size
+-   Support interrupt state effect when component is not active (v5.0.0)
 
 ## Attention
 

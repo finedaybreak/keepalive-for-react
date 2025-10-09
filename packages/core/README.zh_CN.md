@@ -24,13 +24,14 @@
 ## 特性
 
 -   支持react-router-dom v6+ 或 react-router v7+
--   支持React v16+ ~ v18+
+-   支持React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
 -   支持Suspense和懒加载导入
 -   支持错误边界
 -   支持自定义容器
 -   支持使用className `active`和`inactive`进行切换动画过渡
 -   简单实现,无需任何额外依赖和hack方式
 -   压缩后仅6KB大小
+-   支持中断state Effect当组件不活动时 (v5.0.0)
 
 ## 注意事项
 
@@ -348,3 +349,7 @@ pnpm link --global
 cd demo
 pnpm link --global keepalive-for-react
 ```
+
+[discord-link]: https://discord.gg/ycf896w7eA
+[discord-shield]: https://img.shields.io/discord/1232158668913381467?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
+[discord-shield-badge]: https://img.shields.io/discord/1232158668913381467?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=for-the-badge

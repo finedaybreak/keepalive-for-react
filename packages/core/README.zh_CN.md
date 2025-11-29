@@ -35,6 +35,11 @@
 
 ## 注意事项
 
+-   **版本兼容性**：
+
+    -   React 18 请使用 `keepalive-for-react@4.x.x`
+    -   React 19.2+ 请使用 `keepalive-for-react@5.x.x`
+
 -   请勿使用 <React.StrictMode />,它在开发模式下无法与keepalive-for-react一起工作。因为它可能会导致一些意外行为。
 
 -   在路由中仅支持react-router-dom v6+

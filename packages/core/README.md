@@ -35,6 +35,11 @@
 
 ## Attention
 
+-   **Version Compatibility**:
+
+    -   For React 18, please use `keepalive-for-react@4.x.x`
+    -   For React 19.2+, please use `keepalive-for-react@5.x.x`
+
 -   DO NOT use <React.StrictMode />, it CANNOT work with keepalive-for-react in development mode. because it can lead to
     some unexpected behavior.
 

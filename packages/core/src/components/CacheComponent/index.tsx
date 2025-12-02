@@ -160,26 +160,30 @@ const CacheComponent = memo(
 
 function ActivityChildrenContainer({ children, className }: { children: ReactNode; className: string }) {
     const divRef = useRef<HTMLDivElement>(null);
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
-    // 监听divRef style变化 主要是防止Activity组件的display属性被设置为none
+
     useLayoutEffect(() => {
         const dom = divRef.current;
-        if (dom) {
-            const observer = new MutationObserver(() => {
-                dom.style.display = "block";
-            });
-            observer.observe(dom, { attributes: true });
-            return () => {
-                if (timerRef.current) {
-                    clearTimeout(timerRef.current);
+        if (!dom) return;
+
+        const observer = new MutationObserver(() => {
+            // 使用 requestAnimationFrame 避免可能的无限循环
+            requestAnimationFrame(() => {
+                if (dom.style.display !== "block") {
+                    dom.style.display = "block";
                 }
-                timerRef.current = setTimeout(() => {
-                    observer.disconnect();
-                    timerRef.current = null;
-                }, 100);
-            };
-        }
+            });
+        });
+
+        observer.observe(dom, {
+            attributes: true,
+            attributeFilter: ["style"], // 只监听 style 变化
+        });
+
+        return () => {
+            observer.disconnect(); // 同步断开，无需延迟
+        };
     }, []);
+
     return (
         <div className={className} ref={divRef} style={{ height: "100%" }}>
             {children}

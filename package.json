@@ -1,56 +1,39 @@
 {
-    "name": "keepalive-for-react",
+    "name": "keepalive-for-react-monorepo",
     "version": "0.0.0",
     "private": true,
     "description": "A react <KeepAlive/> component like <keep-alive/> in vue",
-    "lint-staged": {
-        "*": [
-            "prettier --write --cache --ignore-unknown"
-        ],
-        "packages/**/*.{js,ts,json,tsx}": [
-            "prettier --write"
-        ]
-    },
     "type": "module",
     "scripts": {
-        "format": "prettier --write \"**/*.{ts,tsx,json}\"",
-        "test": "echo \"Error: no test specified\" && exit 1",
         "build": "pnpm -r build",
         "clean": "pnpm -r clean",
+        "format": "prettier --write \"**/*.{ts,tsx,json}\"",
+        "changeset": "changeset",
+        "version": "changeset version",
+        "release": "pnpm build && changeset publish",
         "prepare": "husky",
-        "publish:core": "cd packages/core && npm publish --access public",
-        "publish:router": "cd packages/router && npm publish --access public",
-        "publish:all": "pnpm build && pnpm publish:core && pnpm publish:router",
-        "version:core": "cd packages/core && npm version",
-        "version:router": "cd packages/router && npm version",
-        "publish": "node publish.js"
+        "example:router": "cd examples/react-router-dom-simple-starter && pnpm install && pnpm dev",
+        "example:tabs": "cd examples/simple-tabs-starter && pnpm install && pnpm dev"
+    },
+    "lint-staged": {
+        "*.{ts,tsx,json,md}": "prettier --write"
     },
     "author": "wongyichen",
     "license": "MIT",
     "devDependencies": {
-        "@babel/core": "^7.23.0",
-        "@babel/plugin-transform-runtime": "^7.22.15",
-        "@babel/preset-env": "^7.22.20",
-        "@babel/preset-react": "^7.22.15",
-        "@babel/preset-typescript": "^7.23.0",
-        "@babel/runtime": "^7.23.1",
-        "@rollup/plugin-babel": "^6.0.4",
-        "@rollup/plugin-commonjs": "^28.0.1",
-        "@rollup/plugin-node-resolve": "^15.2.2",
-        "@rollup/plugin-terser": "^0.4.4",
-        "@rollup/plugin-typescript": "^12.1.4",
+        "@changesets/cli": "^2.29.8",
         "@types/node": "^20.8.2",
-        "@types/react": "19.2.2",
-        "@types/react-dom": "19.2.1",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
         "husky": "^9.0.11",
         "lint-staged": "^15.2.2",
         "prettier": "^3.0.3",
-        "rollup": "^4.0.2",
-        "tslib": "^2.6.2",
+        "tsup": "^8.5.1",
         "typescript": "^5.2.2"
     },
     "engines": {
-        "node": ">=16",
-        "npm": ">=8"
-    }
+        "node": ">=18",
+        "pnpm": ">=8"
+    },
+    "packageManager": "pnpm@10.24.0"
 }

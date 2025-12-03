@@ -8,14 +8,6 @@ import useLayoutEffectOnActive from "./hooks/useLayoutEffectOnActive";
  */
 const useKeepaliveRef = useKeepAliveRef;
 
-export {
-    KeepAlive as default,
-    KeepAlive,
-    useKeepAliveRef,
-    useKeepaliveRef,
-    useEffectOnActive,
-    useLayoutEffectOnActive,
-    useKeepAliveContext,
-};
+export { KeepAlive, useKeepAliveRef, useKeepaliveRef, useEffectOnActive, useLayoutEffectOnActive, useKeepAliveContext };
 
 export type { KeepAliveRef, KeepAliveProps };

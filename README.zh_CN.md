@@ -342,19 +342,6 @@ pnpm install
 pnpm build
 ```
 
-链接包到全局
-
-```bash
-pnpm link --global
-```
-
-在演示项目中测试
-
-```bash
-cd demo
-pnpm link --global keepalive-for-react
-```
-
 [discord-link]: https://discord.gg/ycf896w7eA
 [discord-shield]: https://img.shields.io/discord/1232158668913381467?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=flat-square
 [discord-shield-badge]: https://img.shields.io/discord/1232158668913381467?color=5865F2&label=discord&labelColor=black&logo=discord&logoColor=white&style=for-the-badge

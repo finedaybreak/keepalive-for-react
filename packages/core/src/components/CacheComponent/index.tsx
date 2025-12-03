@@ -1,4 +1,5 @@
-import { ComponentType, Activity, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef, useLayoutEffect } from "react";
+import { ComponentType, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef } from "react";
+import { Activity, hasNativeActivity } from "../../compat/Activity";
 import { createPortal } from "react-dom";
 import { delayAsync, domAttrSet, isInclude } from "../../utils";
 
@@ -18,7 +19,7 @@ export interface CacheComponentProps {
     exclude?: Array<string | RegExp> | string | RegExp;
     include?: Array<string | RegExp> | string | RegExp;
     destroy: (cacheKey: string | string[]) => Promise<void>;
-    activityChildrenContainerClassName: string;
+    enableActivity: boolean;
 }
 
 const cacheDivMarkedClassName = "keepalive-cache-div";
@@ -70,9 +71,8 @@ function isCached(
 
 const CacheComponent = memo(
     function (props: CacheComponentProps): any {
-        const { errorElement: ErrorBoundary = Fragment, cacheNodeClassName, children, cacheKey, exclude, include } = props;
-        const { active, renderCount, destroy, transition, viewTransition, duration, containerDivRef, activityChildrenContainerClassName } =
-            props;
+        const { errorElement: ErrorBoundary = Fragment, cacheNodeClassName, children, cacheKey, exclude, include, enableActivity } = props;
+        const { active, renderCount, destroy, transition, viewTransition, duration, containerDivRef } = props;
         const activatedRef = useRef(false);
 
         activatedRef.current = activatedRef.current || active;
@@ -138,9 +138,11 @@ const CacheComponent = memo(
         return activatedRef.current
             ? createPortal(
                   <ErrorBoundary>
-                      <Activity mode={active ? "visible" : "hidden"}>
-                          <ActivityChildrenContainer className={activityChildrenContainerClassName}>{children}</ActivityChildrenContainer>
-                      </Activity>
+                      {hasNativeActivity && enableActivity ? (
+                          <Activity mode={active ? "visible" : "hidden"}> {children}</Activity>
+                      ) : (
+                          children
+                      )}
                   </ErrorBoundary>,
                   cacheDiv,
                   cacheKey,
@@ -157,38 +159,5 @@ const CacheComponent = memo(
         );
     },
 );
-
-function ActivityChildrenContainer({ children, className }: { children: ReactNode; className: string }) {
-    const divRef = useRef<HTMLDivElement>(null);
-
-    useLayoutEffect(() => {
-        const dom = divRef.current;
-        if (!dom) return;
-
-        const observer = new MutationObserver(() => {
-            // 使用 requestAnimationFrame 避免可能的无限循环
-            requestAnimationFrame(() => {
-                if (dom.style.display !== "block") {
-                    dom.style.display = "block";
-                }
-            });
-        });
-
-        observer.observe(dom, {
-            attributes: true,
-            attributeFilter: ["style"], // 只监听 style 变化
-        });
-
-        return () => {
-            observer.disconnect(); // 同步断开，无需延迟
-        };
-    }, []);
-
-    return (
-        <div className={className} ref={divRef} style={{ height: "100%" }}>
-            {children}
-        </div>
-    );
-}
 
 export default CacheComponent;

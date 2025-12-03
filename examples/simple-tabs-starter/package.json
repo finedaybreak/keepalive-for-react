@@ -10,15 +10,15 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "keepalive-for-react": "^5.0.0",
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0",
+        "keepalive-for-react": "^5.0.4-beta.0",
+        "react": "^19",
+        "react-dom": "^19",
         "zustand": "^5.0.8"
     },
     "devDependencies": {
         "@eslint/js": "^9.11.1",
-        "@types/react": "19.2.2",
-        "@types/react-dom": "19.2.1",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
         "@vitejs/plugin-react": "^4.3.2",
         "autoprefixer": "^10.4.20",
         "eslint": "^9.11.1",

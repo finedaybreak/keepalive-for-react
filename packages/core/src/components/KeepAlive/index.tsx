@@ -27,10 +27,9 @@ export interface KeepAliveProps {
     exclude?: Array<string | RegExp> | string | RegExp;
     include?: Array<string | RegExp> | string | RegExp;
     onBeforeActive?: (activeCacheKey: string) => void;
-    customContainerRef?: RefObject<HTMLDivElement>;
+    customContainerRef?: RefObject<HTMLDivElement> | undefined;
     cacheNodeClassName?: string;
     containerClassName?: string;
-    activityChildrenContainerClassName?: string;
     errorElement?: ComponentType<{
         children: ReactNode;
     }>;
@@ -51,12 +50,18 @@ export interface KeepAliveProps {
      * transition duration default 200
      */
     duration?: number;
-    aliveRef?: RefObject<KeepAliveRef | undefined>;
+    aliveRef?: RefObject<KeepAliveRef | undefined | null>;
     /**
      * max alive time for cache node (second)
      * @default 0 (no limit)
      */
     maxAliveTime?: number | MaxAliveConfig[];
+
+    /**
+     * enable Activity component from react 19+
+     * @default true
+     */
+    enableActivity?: boolean;
 }
 
 interface MaxAliveConfig {
@@ -113,7 +118,6 @@ function KeepAlive(props: KeepAliveProps) {
         customContainerRef,
         cacheNodeClassName = `cache-component`,
         containerClassName = "keep-alive-render",
-        activityChildrenContainerClassName = "activity-children-container",
         errorElement,
         transition = false,
         viewTransition = false,
@@ -121,6 +125,7 @@ function KeepAlive(props: KeepAliveProps) {
         children,
         aliveRef,
         maxAliveTime = 0,
+        enableActivity = true,
     } = props;
 
     const containerDivRef = customContainerRef || useRef<HTMLDivElement>(null);
@@ -267,8 +272,8 @@ function KeepAlive(props: KeepAliveProps) {
                             errorElement={errorElement}
                             active={activeCacheKey === cacheKey}
                             cacheNodeClassName={cacheNodeClassName}
-                            activityChildrenContainerClassName={activityChildrenContainerClassName}
                             cacheKey={cacheKey}
+                            enableActivity={enableActivity}
                         >
                             {ele}
                         </CacheComponent>

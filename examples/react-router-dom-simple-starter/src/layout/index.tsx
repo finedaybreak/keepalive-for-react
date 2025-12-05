@@ -37,6 +37,8 @@ function Layout() {
                         transition={true}
                         exclude={["/nocache-counter"]}
                         aliveRef={aliveRef}
+                        enableActivity={false}
+                        // 虽然 Activity 可以提高性能，但是这里为了有淡出效果，禁用了19.2 的 Activity 组件
                     />
                 </CustomSuspense>
             </div>

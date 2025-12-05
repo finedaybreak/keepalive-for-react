@@ -213,6 +213,12 @@ interface KeepAliveProps {
      * @default 0 (无限制)
      */
     maxAliveTime?: number | MaxAliveConfig[];
+    /**
+     * 启用 Activity 组件 from react 19+
+     * @default true
+     * Activity 组件可以提高性能，但是会影响过渡效果
+     */
+    enableActivity?: boolean;
 }
 
 interface MaxAliveConfig {

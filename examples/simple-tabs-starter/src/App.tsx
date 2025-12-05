@@ -44,7 +44,8 @@ function App() {
                 ))}
             </div>
             <div className="tab-content min-h-[200px]">
-                <KeepAlive transition={true} activeCacheKey={currentTab} exclude={["tab3"]}>
+                {/*  虽然 Activity 可以提高性能，但是这里为了有淡出效果，禁用了19.2 的 Activity 组件 */}
+                <KeepAlive enableActivity={false} transition={true} activeCacheKey={currentTab} exclude={["tab3"]}>
                     {tab && <tab.component />}
                 </KeepAlive>
             </div>

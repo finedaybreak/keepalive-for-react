@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.6
+
+### Patch Changes
+
+-   update doc
+
 ## 5.0.4
 
 ### Patch Changes

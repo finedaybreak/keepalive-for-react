@@ -55,8 +55,8 @@ importers:
         version: 19.2.0(react@19.2.0)
     devDependencies:
       keepalive-for-react:
-        specifier: ^5.0.4-beta.0
-        version: 5.0.4-beta.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^5.0.4
+        version: 5.0.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-router:
         specifier: ^7.10.0
         version: 7.10.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -744,8 +744,8 @@ packages:
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
-  keepalive-for-react@5.0.4-beta.0:
-    resolution: {integrity: sha512-l3CpIZqQ2UPbmbVUxzoPOe0xgMwNdQql6jI0Kk6hiTJiqWEilvMsjN8iR6KgEWn78K3XZPpXm+DIlfLtqsM2bQ==}
+  keepalive-for-react@5.0.4:
+    resolution: {integrity: sha512-wsY3ZsnEiJlGK04P5bx5xeW8LSuKfZXgTAFJb9Es+oLdbqCT2j2QdWMu3TZvynsBGgsJn6uNORuRE2j2LNyf+Q==}
     peerDependencies:
       react: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
       react-dom: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
@@ -1789,7 +1789,7 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  keepalive-for-react@5.0.4-beta.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  keepalive-for-react@5.0.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)

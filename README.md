@@ -215,6 +215,12 @@ interface KeepAliveProps {
      * @default 0 (no limit)
      */
     maxAliveTime?: number | MaxAliveConfig[];
+    /**
+     * enable Activity component from react 19+
+     * @default true
+     * Activity component can improve performance, but it will affect the transition effect
+     */
+    enableActivity?: boolean;
 }
 
 interface MaxAliveConfig {

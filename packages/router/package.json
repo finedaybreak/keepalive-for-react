@@ -1,6 +1,6 @@
 {
     "name": "keepalive-for-react-router",
-    "version": "5.0.5",
+    "version": "5.0.7",
     "description": "React Router integration for keepalive-for-react",
     "homepage": "https://github.com/finedaybreak/keepalive-for-react",
     "repository": {
@@ -36,13 +36,13 @@
     "author": "wongyichen",
     "license": "MIT",
     "peerDependencies": {
-        "keepalive-for-react": "^5.0.4",
+        "keepalive-for-react": "^5.0.7",
         "react": ">=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
         "react-dom": ">=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
         "react-router": ">=6.0.0"
     },
     "devDependencies": {
-        "keepalive-for-react": "^5.0.4",
+        "keepalive-for-react": "^5.0.7",
         "react-router": "^7.10.0"
     }
 }

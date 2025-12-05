@@ -1,5 +1,13 @@
 # keepalive-for-react-router
 
+## 5.0.7
+
+### Patch Changes
+
+-   change enableActivity to default false
+-   Updated dependencies
+    -   keepalive-for-react@5.0.7
+
 ## 5.0.5
 
 ### Patch Changes

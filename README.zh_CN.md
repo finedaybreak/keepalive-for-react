@@ -215,8 +215,9 @@ interface KeepAliveProps {
     maxAliveTime?: number | MaxAliveConfig[];
     /**
      * 启用 Activity 组件 from react 19+
-     * @default true
+     * @default false
      * Activity 组件可以提高性能，但是会影响过渡效果
+     * 注意: 如果启用 Activity 组件, useEffect 会在组件激活时触发
      */
     enableActivity?: boolean;
 }

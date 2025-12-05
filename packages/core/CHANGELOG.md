@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.7
+
+### Patch Changes
+
+-   change enableActivity to default false
+
 ## 5.0.6
 
 ### Patch Changes

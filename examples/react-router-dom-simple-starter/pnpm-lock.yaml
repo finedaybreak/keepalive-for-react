@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       keepalive-for-react:
-        specifier: ^5.0.6
-        version: 5.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+        specifier: ^5.0.7
+        version: 5.0.7(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       keepalive-for-react-router:
-        specifier: ^5.0.5
-        version: 5.0.5(keepalive-for-react@5.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-router@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
+        specifier: ^5.0.7
+        version: 5.0.7(keepalive-for-react@5.0.7(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-router@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -955,16 +955,16 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  keepalive-for-react-router@5.0.5:
-    resolution: {integrity: sha512-Z6fQbTQHer/VqckCwpLDyf0N15Hl1J9nfFYoxHgvbOqMaiv1WSn6DUlzexoVinoBb9gCnTnDlJxb2DTyyprH4w==}
+  keepalive-for-react-router@5.0.7:
+    resolution: {integrity: sha512-HOp8S8y9zTHuIU2T/JSpGYdr0ogwtDe2x90kDlAYzuL/iP/Yp/Njrpx8aeMpoCHEJjUcJPepThMAVKCq2QDH4A==}
     peerDependencies:
-      keepalive-for-react: ^5.0.4
+      keepalive-for-react: ^5.0.7
       react: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
       react-dom: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
       react-router: '>=6.0.0'
 
-  keepalive-for-react@5.0.6:
-    resolution: {integrity: sha512-JvKJ/Mq49RfND0E0qh8voL2la7GakGSrB17d5Slp/3eXM16IgtZSQ1fg9PjRiiKbsGlcacWBc320vkto0M/vRg==}
+  keepalive-for-react@5.0.7:
+    resolution: {integrity: sha512-tUhm0XHfNfVL5TB8BjqqgxPmj1qYhljHWY5m7RqHpHSYftLz7sQW+Jr+goCkaWn/AlwH/2JpKhiVw/n8M41+6w==}
     peerDependencies:
       react: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
       react-dom: '>=16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0'
@@ -2191,14 +2191,14 @@ snapshots:
 
   json5@2.2.3: {}
 
-  keepalive-for-react-router@5.0.5(keepalive-for-react@5.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-router@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1):
+  keepalive-for-react-router@5.0.7(keepalive-for-react@5.0.7(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-router@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1):
     dependencies:
-      keepalive-for-react: 5.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      keepalive-for-react: 5.0.7(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
       react-router: 7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
 
-  keepalive-for-react@5.0.6(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+  keepalive-for-react@5.0.7(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
     dependencies:
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)

@@ -10,7 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "keepalive-for-react": "^5.0.6",
+        "keepalive-for-react": "^5.0.7",
         "react": "^19.2.1",
         "react-dom": "^19.2.1",
         "zustand": "^5.0.9"

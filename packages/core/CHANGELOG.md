@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.8
+
+### Patch Changes
+
+-   fix(CacheComponent): switch useEffect to useLayoutEffect for DOM operations
+
 ## 5.0.7
 
 ### Patch Changes

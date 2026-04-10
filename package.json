@@ -21,7 +21,7 @@
     "author": "wongyichen",
     "license": "MIT",
     "devDependencies": {
-        "@changesets/cli": "^2.29.8",
+        "@changesets/cli": "^2.30.0",
         "@types/node": "^20.8.2",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",

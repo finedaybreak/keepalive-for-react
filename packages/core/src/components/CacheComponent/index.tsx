@@ -1,4 +1,4 @@
-import { ComponentType, Fragment, memo, ReactNode, RefObject, useEffect, useMemo, useRef } from "react";
+import { ComponentType, Fragment, memo, ReactNode, RefObject, useLayoutEffect, useMemo, useRef } from "react";
 import { Activity, hasNativeActivity } from "../../compat/Activity";
 import { createPortal } from "react-dom";
 import { delayAsync, domAttrSet, isInclude } from "../../utils";
@@ -87,7 +87,7 @@ const CacheComponent = memo(
             return cacheDiv;
         }, [renderCount, cacheNodeClassName]);
 
-        useEffect(() => {
+        useLayoutEffect(() => {
             const cached = isCached(cacheKey, exclude, include);
             const containerDiv = containerDivRef.current;
             if (!containerDiv) {

@@ -3,12 +3,18 @@ import { useState } from "react";
 
 function NoCacheCounter() {
     const [count, setCount] = useState(0);
-    const { refresh } = useKeepAliveContext();
+    const { refresh, destroy } = useKeepAliveContext();
     useEffectOnCreate(() => {
-        console.log("NoCacheCounter is created (useEffectOnCreate)", count);
+        console.log("NoCacheCounter is created (OnCreate)", count);
+        return () => {
+            console.log("NoCacheCounter is destroyed (OnCreate)", count);
+        };
     });
     useLayoutEffectOnCreate(() => {
-        console.log("NoCacheCounter is created (useLayoutEffectOnCreate)", count);
+        console.log("NoCacheCounter is created (OnLayoutCreate)", count);
+        return () => {
+            console.log("NoCacheCounter is destroyed (OnLayoutCreate)", count);
+        };
     });
     return (
         <div className="p-[20px]">
@@ -29,6 +35,12 @@ function NoCacheCounter() {
                 </button>
                 <button className="px-[10px] py-[5px] bg-green-500 active:bg-green-600 text-white rounded-md" onClick={() => refresh()}>
                     Refresh
+                </button>
+                <button
+                    className="px-[10px] py-[5px] bg-red-500 active:bg-red-600 text-white rounded-md"
+                    onClick={() => destroy("/counter")}
+                >
+                    Destroy
                 </button>
             </div>
         </div>

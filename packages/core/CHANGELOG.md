@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.10
+
+### Patch Changes
+
+-   new hooks: useEffectOnCreate, useLayoutEffectOnCreate
+
 ## 5.0.9
 
 ### Patch Changes

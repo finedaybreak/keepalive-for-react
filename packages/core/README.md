@@ -254,6 +254,32 @@ useLayoutEffectOnActive(
 // if true, which means the callback will be skipped when the useLayoutEffect is triggered in first render
 ```
 
+### useEffectOnCreate
+
+Run a callback only once when the component is first created (cached), and run the returned cleanup only when the component is destroyed from the cache. Unlike `useEffect(fn, [])`, it will NOT re-run when the cached component is re-activated.
+
+```tsx
+useEffectOnCreate(() => {
+    console.log("component created");
+    return () => {
+        console.log("component destroyed");
+    };
+});
+```
+
+### useLayoutEffectOnCreate
+
+Same as `useEffectOnCreate` but uses `useLayoutEffect` internally. Useful when the create-time logic needs to run synchronously before the browser paints.
+
+```tsx
+useLayoutEffectOnCreate(() => {
+    console.log("component created (layout)");
+    return () => {
+        console.log("component destroyed (layout)");
+    };
+});
+```
+
 ### useKeepAliveContext
 
 type definition

@@ -6,10 +6,10 @@ interface CacheComponentProviderProps extends KeepAliveContext {
 }
 
 const CacheComponentProvider = memo(function (props: CacheComponentProviderProps) {
-    const { children, active, refresh, destroy, destroyAll, destroyOther, getCacheNodes } = props;
+    const { children, active, refresh, destroy, destroyAll, destroyOther, getCacheNodes, _cacheKey } = props;
     const value = useMemo(() => {
-        return { active, refresh, destroy, destroyAll, destroyOther, getCacheNodes };
-    }, [active, refresh, destroy, destroyAll, destroyOther, getCacheNodes]);
+        return { active, refresh, destroy, destroyAll, destroyOther, getCacheNodes, _cacheKey };
+    }, [active, refresh, destroy, destroyAll, destroyOther, getCacheNodes, _cacheKey]);
     return <CacheComponentContext.Provider value={value}>{children}</CacheComponentContext.Provider>;
 });
 

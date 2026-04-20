@@ -14,6 +14,7 @@ import { isArr, isFn, isNil, isRegExp, macroTask } from "../../utils";
 import CacheComponentProvider from "../CacheComponentProvider";
 import CacheComponent from "../CacheComponent";
 import safeStartTransition from "../../compat/safeStartTransition";
+import eventBus from "../../event";
 
 export type KeepAliveChildren = ReactNode | ReactElement | null | undefined;
 
@@ -157,6 +158,9 @@ function KeepAlive(props: KeepAliveProps) {
                                     needUpdate = prev + maxAliveTime * 1000 < lastActiveTime;
                                 }
                             }
+                            if (needUpdate) {
+                                // eventBus.emit("destroy", [activeCacheKey]);
+                            }
                             return {
                                 ...item,
                                 ele: children,
@@ -173,6 +177,8 @@ function KeepAlive(props: KeepAliveProps) {
                             return prev.lastActiveTime < cur.lastActiveTime ? prev : cur;
                         });
                         prevCacheNodes.splice(prevCacheNodes.indexOf(node), 1);
+                        // const deletedCacheKeys = deletedNodes.map(item => item.cacheKey);
+                        // eventBus.emit("destroy", deletedCacheKeys);
                     }
                     return [...prevCacheNodes, { cacheKey: activeCacheKey, lastActiveTime, ele: children, renderCount: 0 }];
                 }
@@ -184,6 +190,7 @@ function KeepAlive(props: KeepAliveProps) {
         (cacheKey?: string) => {
             setCacheNodes(cacheNodes => {
                 const targetCacheKey = cacheKey || activeCacheKey;
+                eventBus.emit("refresh", targetCacheKey);
                 return cacheNodes.map(item => {
                     if (item.cacheKey === targetCacheKey) {
                         return { ...item, renderCount: item.renderCount + 1 };
@@ -199,6 +206,7 @@ function KeepAlive(props: KeepAliveProps) {
         (cacheKey?: string | string[]) => {
             const targetCacheKey = cacheKey || activeCacheKey;
             const cacheKeys = isArr(targetCacheKey) ? targetCacheKey : [targetCacheKey];
+            eventBus.emit("destroy", cacheKeys);
             return new Promise<void>(resolve => {
                 macroTask(() => {
                     setCacheNodes(cacheNodes => {
@@ -213,6 +221,7 @@ function KeepAlive(props: KeepAliveProps) {
 
     const destroyAll = useCallback(() => {
         return new Promise<void>(resolve => {
+            eventBus.emit("destroyAll");
             macroTask(() => {
                 setCacheNodes([]);
                 resolve();
@@ -224,6 +233,7 @@ function KeepAlive(props: KeepAliveProps) {
         (cacheKey?: string) => {
             const targetCacheKey = cacheKey || activeCacheKey;
             return new Promise<void>(resolve => {
+                eventBus.emit("destroyOther", targetCacheKey);
                 macroTask(() => {
                     setCacheNodes(cacheNodes => {
                         return [...cacheNodes.filter(item => item.cacheKey === targetCacheKey)];
@@ -261,6 +271,7 @@ function KeepAlive(props: KeepAliveProps) {
                         destroyAll={destroyAll}
                         destroyOther={destroyOther}
                         getCacheNodes={getCacheNodes}
+                        _cacheKey={cacheKey}
                     >
                         <CacheComponent
                             destroy={destroy}

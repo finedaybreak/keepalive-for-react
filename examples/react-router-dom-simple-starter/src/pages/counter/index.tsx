@@ -5,15 +5,18 @@ function Counter() {
     const [count, setCount] = useState(0);
     const { refresh, active } = useKeepAliveContext();
 
-    useEffectOnActive(() => {
-        console.log("Counter is active (useEffectOnActive)", count);
-        return () => {
-            console.log("Counter is destroyed (useEffectOnActive)", count);
-        };
-    }, [count]);
+    // useEffectOnActive(() => {
+    //     console.log("Counter is active (OnActive)", count);
+    //     return () => {
+    //         console.log("Counter is destroyed (OnActive)", count);
+    //     };
+    // }, [count]);
 
     useEffectOnCreate(() => {
-        console.log("Counter is created (useEffectOnCreate)", count);
+        console.log("Counter is created (OnCreate)", count);
+        return () => {
+            console.log("Counter is destroyed (_OnCreate)", count);
+        };
     });
 
     return (

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useOnCreate from "./useOnCreate";
 
-const useEffectOnCreate = (cb: () => void): void => {
+const useEffectOnCreate = (cb: () => any): void => {
     useOnCreate(cb, useEffect);
 };
 

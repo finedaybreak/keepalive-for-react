@@ -1,5 +1,5 @@
 import { Activity } from "../../compat/Activity";
-import { ReactNode, useLayoutEffect, useRef, useState, memo } from "react";
+import { ReactNode, useLayoutEffect, useRef, useState, memo, startTransition } from "react";
 
 interface MemoizedActivtyProps {
     children: ReactNode;
@@ -12,7 +12,9 @@ function _MemoizedActivty({ children, active, duration }: MemoizedActivtyProps) 
     const delayedActiveTimerRef = useRef<null | ReturnType<typeof setTimeout>>(null);
     useLayoutEffect(() => {
         if (active) {
-            setDelayedActive(true);
+            startTransition(() => {
+                setDelayedActive(true);
+            });
         } else {
             if (delayedActiveTimerRef.current) {
                 clearTimeout(delayedActiveTimerRef.current);

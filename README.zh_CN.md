@@ -251,6 +251,32 @@ useLayoutEffectOnActive(
 // 如果为true,表示在首次渲染时触发useLayoutEffect时会跳过回调
 ```
 
+### useEffectOnCreate
+
+只在组件首次创建(加入缓存)时执行一次回调，并在组件从缓存中被销毁时执行返回的清理函数。与 `useEffect(fn, [])` 不同，被缓存的组件再次激活时 **不会** 重新执行。
+
+```tsx
+useEffectOnCreate(() => {
+    console.log("组件创建");
+    return () => {
+        console.log("组件销毁");
+    };
+});
+```
+
+### useLayoutEffectOnCreate
+
+与 `useEffectOnCreate` 行为一致,内部使用 `useLayoutEffect`。适用于需要在浏览器绘制前同步执行创建逻辑的场景。
+
+```tsx
+useLayoutEffectOnCreate(() => {
+    console.log("组件创建 (layout)");
+    return () => {
+        console.log("组件销毁 (layout)");
+    };
+});
+```
+
 ### useKeepAliveContext
 
 类型定义

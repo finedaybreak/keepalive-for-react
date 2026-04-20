@@ -1,4 +1,4 @@
-import { useEffectOnActive, useKeepAliveContext } from "keepalive-for-react";
+import { useEffectOnActive, useEffectOnCreate, useKeepAliveContext } from "keepalive-for-react";
 import { useState } from "react";
 
 function Counter() {
@@ -6,8 +6,15 @@ function Counter() {
     const { refresh, active } = useKeepAliveContext();
 
     useEffectOnActive(() => {
-        console.log("Counter is active", count);
+        console.log("Counter is active (useEffectOnActive)", count);
+        return () => {
+            console.log("Counter is destroyed (useEffectOnActive)", count);
+        };
     }, [count]);
+
+    useEffectOnCreate(() => {
+        console.log("Counter is created (useEffectOnCreate)", count);
+    });
 
     return (
         <div className="p-[20px]">

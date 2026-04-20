@@ -1,10 +1,15 @@
-import { useKeepAliveContext } from "keepalive-for-react";
+import { useEffectOnCreate, useKeepAliveContext, useLayoutEffectOnCreate } from "keepalive-for-react";
 import { useState } from "react";
 
 function NoCacheCounter() {
     const [count, setCount] = useState(0);
     const { refresh } = useKeepAliveContext();
-
+    useEffectOnCreate(() => {
+        console.log("NoCacheCounter is created (useEffectOnCreate)", count);
+    });
+    useLayoutEffectOnCreate(() => {
+        console.log("NoCacheCounter is created (useLayoutEffectOnCreate)", count);
+    });
     return (
         <div className="p-[20px]">
             <h1 className="text-center text-xl font-bold py-[10px]">Counter (No Cache)</h1>

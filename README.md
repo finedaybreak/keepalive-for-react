@@ -216,9 +216,8 @@ interface KeepAliveProps {
      */
     maxAliveTime?: number | MaxAliveConfig[];
     /**
-     * enable Activity component from react 19+
+     * enable Activity component from react 19.2+
      * @default false
-     * Activity component can improve performance, but it will affect the transition effect
      * Attention: if enable Activity component, useEffect will trigger when the component is active
      */
     enableActivity?: boolean;

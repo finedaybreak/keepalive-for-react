@@ -1,7 +1,8 @@
 import { ComponentType, Fragment, memo, ReactNode, RefObject, useLayoutEffect, useMemo, useRef } from "react";
-import { Activity, hasNativeActivity } from "../../compat/Activity";
+import { hasNativeActivity } from "../../compat/Activity";
 import { createPortal } from "react-dom";
 import { delayAsync, domAttrSet, isInclude } from "../../utils";
+import MemoizedActivty from "../MemoizedActivty";
 
 export interface CacheComponentProps {
     children: ReactNode;
@@ -139,7 +140,9 @@ const CacheComponent = memo(
             ? createPortal(
                   <ErrorBoundary>
                       {hasNativeActivity && enableActivity ? (
-                          <Activity mode={active ? "visible" : "hidden"}> {children}</Activity>
+                          <MemoizedActivty active={active} duration={duration}>
+                              {children}
+                          </MemoizedActivty>
                       ) : (
                           children
                       )}

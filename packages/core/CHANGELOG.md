@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.9
+
+### Patch Changes
+
+-   Wraps Activity with a delayed hide so the outgoing component stays visible during the transition duration, preserving fade/transition effects when enableActivity is on.
+
 ## 5.0.8
 
 ### Patch Changes

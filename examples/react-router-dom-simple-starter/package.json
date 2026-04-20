@@ -12,13 +12,13 @@
     "dependencies": {
         "keepalive-for-react": "^5.0.8",
         "keepalive-for-react-router": "^5.0.7",
-        "react": "^19.2.1",
-        "react-dom": "^19.2.1",
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5",
         "react-router": "^7.10.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
-        "@types/react": "^19.2.7",
+        "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^4.7.0",
         "autoprefixer": "^10.4.22",

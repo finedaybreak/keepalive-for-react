@@ -1,3 +1,4 @@
 # 这是一个独立项目，不属于父级 monorepo
 packages: []
-
+overrides:
+  keepalive-for-react: link:../../../../../../Library/pnpm/global/5/node_modules/keepalive-for-react

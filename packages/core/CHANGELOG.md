@@ -1,5 +1,11 @@
 # keepalive-for-react
 
+## 5.0.11
+
+### Patch Changes
+
+-   fix destroy emit
+
 ## 5.0.10
 
 ### Patch Changes

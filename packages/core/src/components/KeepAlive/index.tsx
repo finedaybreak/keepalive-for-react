@@ -159,7 +159,7 @@ function KeepAlive(props: KeepAliveProps) {
                                 }
                             }
                             if (needUpdate) {
-                                // eventBus.emit("destroy", [activeCacheKey]);
+                                eventBus.emit("destroy", [activeCacheKey]);
                             }
                             return {
                                 ...item,
@@ -176,9 +176,9 @@ function KeepAlive(props: KeepAliveProps) {
                         const node = prevCacheNodes.reduce((prev, cur) => {
                             return prev.lastActiveTime < cur.lastActiveTime ? prev : cur;
                         });
-                        prevCacheNodes.splice(prevCacheNodes.indexOf(node), 1);
-                        // const deletedCacheKeys = deletedNodes.map(item => item.cacheKey);
-                        // eventBus.emit("destroy", deletedCacheKeys);
+                        const deletedNodes = prevCacheNodes.splice(prevCacheNodes.indexOf(node), 1);
+                        const deletedCacheKeys = deletedNodes.map(item => item.cacheKey);
+                        eventBus.emit("destroy", deletedCacheKeys);
                     }
                     return [...prevCacheNodes, { cacheKey: activeCacheKey, lastActiveTime, ele: children, renderCount: 0 }];
                 }

@@ -10,11 +10,11 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "keepalive-for-react": "^5.0.10",
-        "keepalive-for-react-router": "^5.0.7",
-        "react": "^19.2.5",
-        "react-dom": "^19.2.5",
-        "react-router": "^7.10.1"
+        "keepalive-for-react": "^6.0.0",
+        "keepalive-for-react-router": "^6.0.0",
+        "react": "^19.2.7",
+        "react-dom": "^19.2.7",
+        "react-router": "^8.3.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
@@ -30,11 +30,9 @@
         "tailwindcss": "^3.4.18",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.1",
-        "vite": "^6.4.1"
+        "vite": "^7.2.6"
     },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "esbuild"
-        ]
+    "engines": {
+        "node": ">=22.22.0"
     }
 }

@@ -23,7 +23,7 @@
 
 ## 特性
 
-- 支持react-router-dom v6+ 或 react-router v7+
+- 支持 React Router v6、v7 和 v8
 - 支持React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
 - 支持Suspense和懒加载导入
 - 支持错误边界
@@ -38,11 +38,11 @@
 - **版本兼容性**：
 
     - React 18 请使用 `keepalive-for-react@4.x.x`
-    - React 19.2+ 请使用 `keepalive-for-react@5.x.x`
+    - React 19.2+ 请使用 `keepalive-for-react@6`
 
 - 请勿使用 <React.StrictMode />,它在开发模式下无法与keepalive-for-react一起工作。因为它可能会导致一些意外行为。
 
-- 在路由中仅支持react-router-dom v6+
+- 路由集成支持 `react-router-dom@6` 和 `react-router@7` / `react-router@8`。
 
 ## 安装
 
@@ -60,22 +60,24 @@ pnpm add keepalive-for-react
 
 ## 使用
 
-### 配合react-router-dom v6+ 或 react-router v7+使用
+### 配合 React Router v6、v7 或 v8 使用
 
-1. 安装react-router-dom v6+ 或 react-router v7+
+1. 根据 React Router 版本安装依赖。`keepalive-for-react-router@6` 支持以下三个版本。
 
 ```bash
-# v6+
-npm install react-router-dom keepalive-for-react keepalive-for-react-router@1.x.x
-# v7+
-npm install react-router keepalive-for-react keepalive-for-react-router@2.x.x
+# v6
+npm install react-router-dom@6 keepalive-for-react@6 keepalive-for-react-router@6
+# v7
+npm install react-router@7 keepalive-for-react@6 keepalive-for-react-router@6
+# v8
+npm install react-router@^8.3.1 keepalive-for-react@6 keepalive-for-react-router@6
 ```
+
+React Router v8.3.1 要求 Node.js >=22.22.0，React / React DOM >=19.2.7。使用 v8 前请先更新这些依赖。
 
 2. 在项目中使用KeepAlive
 
 ```tsx
-// v6+ keepalive-for-react-router@1.x.x
-// v7+ keepalive-for-react-router@2.x.x
 import KeepAliveRouteOutlet from "keepalive-for-react-router";
 
 function Layout() {
@@ -91,7 +93,10 @@ function Layout() {
 
 ```tsx
 import { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+// v6
+import { useLocation, useOutlet } from "react-router-dom";
+// v7 / v8
+// import { useLocation, useOutlet } from "react-router";
 import { KeepAlive, useKeepAliveRef } from "keepalive-for-react";
 
 function Layout() {

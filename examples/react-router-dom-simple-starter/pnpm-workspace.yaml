@@ -1,0 +1,6 @@
+packages: []
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - keepalive-for-react-router@6.0.0
+  - keepalive-for-react@6.0.0

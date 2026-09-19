@@ -23,11 +23,13 @@ function Home() {
         <div className="p-[20px]" ref={domRef}>
             <h1 className="text-center text-xl font-bold py-[10px]">Home</h1>
             <p className="text-center text-neutral-500">
-                Welcome to the home page, this is a simple example of how to use keepalive-for-react with react-router-dom.
+                Welcome to the home page, this is a simple example of how to use keepalive-for-react with React Router v8.
             </p>
             <h2 className="text-lg font-bold mt-[10px] mb-[5px]">Install</h2>
             <code className="block w-full bg-gray-100 p-[10px] rounded-md">
-                <pre className="text-[12px] whitespace-pre-wrap">{`npm install keepalive-for-react react-router-dom`}</pre>
+                <pre className="text-[12px] whitespace-pre-wrap">
+                    {`npm install keepalive-for-react@6 keepalive-for-react-router@6 react-router@^8.3.1`}
+                </pre>
             </code>
             <div className=" text-neutral-500 mt-[30px]">{"./src/layout/index.tsx"}</div>
             <code className="block w-full bg-gray-100 p-[10px] rounded-md mt-[10px]">

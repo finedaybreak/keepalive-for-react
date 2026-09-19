@@ -1,28 +1,36 @@
 # KeepAlive for React Router
 
+Supports React Router v6, v7, and v8 with `keepalive-for-react-router@6`.
+
 ## Installation
 
 ```bash
-npm install keepalive-for-react keepalive-for-react-router
+npm install keepalive-for-react@6 keepalive-for-react-router@6
 ```
 
-### v6+
+### v6
 
 ```bash
-npm install react-router-dom keepalive-for-react keepalive-for-react-router@1.x.x
+npm install react-router-dom@6 keepalive-for-react@6 keepalive-for-react-router@6
 ```
 
-### v7+
+### v7
 
 ```bash
-npm install react-router keepalive-for-react keepalive-for-react-router@2.x.x
+npm install react-router@7 keepalive-for-react@6 keepalive-for-react-router@6
+```
+
+### v8
+
+React Router v8.3.1 requires Node.js >=22.22.0 and React / React DOM >=19.2.7. Update these dependencies before using v8.
+
+```bash
+npm install react-router@^8.3.1 keepalive-for-react@6 keepalive-for-react-router@6
 ```
 
 ## Usage
 
 ```tsx
-// v6+ keepalive-for-react-router@1.x.x
-// v7+ keepalive-for-react-router@2.x.x
 import KeepAliveRouteOutlet from "keepalive-for-react-router";
 
 function Layout() {

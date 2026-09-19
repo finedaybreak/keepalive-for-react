@@ -1,4 +1,4 @@
-import { useEffectOnActive, useEffectOnCreate, useKeepAliveContext } from "keepalive-for-react";
+import { useEffectOnCreate, useKeepAliveContext } from "keepalive-for-react";
 import { useState } from "react";
 
 function Counter() {

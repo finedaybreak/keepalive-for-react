@@ -23,7 +23,7 @@
 
 ## Features
 
-- Support react-router-dom v6+ or react-router v7+
+- Support React Router v6, v7, and v8
 - Support React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
 - Support Suspense and Lazy import
 - Support ErrorBoundary
@@ -38,12 +38,12 @@
 - **Version Compatibility**:
 
     - For React 18, please use `keepalive-for-react@4.x.x`
-    - For React 19.2+, please use `keepalive-for-react@5.x.x`
+    - For React 19.2+, please use `keepalive-for-react@6`
 
 - DO NOT use <React.StrictMode />, it CANNOT work with keepalive-for-react in development mode. because it can lead to
   some unexpected behavior.
 
-- In Router only support react-router-dom v6+
+- Router integration supports `react-router-dom@6` and `react-router@7` / `react-router@8`.
 
 ## Install
 
@@ -61,22 +61,24 @@ pnpm add keepalive-for-react
 
 ## Usage
 
-### in react-router-dom v6+ or react-router v7+
+### With React Router v6, v7, or v8
 
-1. install react-router-dom v6+ or react-router v7+
+1. Install the packages for your React Router version. `keepalive-for-react-router@6` supports all three versions.
 
 ```bash
-# v6+
-npm install react-router-dom keepalive-for-react keepalive-for-react-router@1.x.x
-# v7+
-npm install react-router keepalive-for-react keepalive-for-react-router@2.x.x
+# v6
+npm install react-router-dom@6 keepalive-for-react@6 keepalive-for-react-router@6
+# v7
+npm install react-router@7 keepalive-for-react@6 keepalive-for-react-router@6
+# v8
+npm install react-router@^8.3.1 keepalive-for-react@6 keepalive-for-react-router@6
 ```
+
+React Router v8.3.1 requires Node.js >=22.22.0 and React / React DOM >=19.2.7. Update these dependencies before using v8.
 
 2. use KeepAlive in your project
 
 ```tsx
-// v6+ keepalive-for-react-router@1.x.x
-// v7+ keepalive-for-react-router@2.x.x
 import KeepAliveRouteOutlet from "keepalive-for-react-router";
 
 function Layout() {
@@ -92,9 +94,9 @@ or
 
 ```tsx
 import { useMemo } from "react";
-// v6+
+// v6
 import { useLocation, useOutlet } from "react-router-dom";
-// v7
+// v7 / v8
 // import { useLocation, useOutlet } from "react-router";
 import { KeepAlive, useKeepAliveRef } from "keepalive-for-react";
 

@@ -28,17 +28,11 @@
         "husky": "^9.0.11",
         "lint-staged": "^15.2.2",
         "prettier": "^3.0.3",
-        "tsup": "^8.5.1",
+        "tsdown": "^0.23.0",
         "typescript": "^5.2.2"
     },
     "engines": {
         "node": ">=18",
         "pnpm": ">=8"
-    },
-    "packageManager": "pnpm@10.24.0",
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "esbuild"
-        ]
     }
 }

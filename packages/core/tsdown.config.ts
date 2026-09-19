@@ -1,16 +1,17 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 export default defineConfig({
     entry: ["src/index.ts"],
     format: ["cjs", "esm"],
-    outExtension({ format }) {
+    outExtensions({ format }) {
         return {
             js: format === "cjs" ? ".cjs" : ".mjs",
         };
     },
-    dts: true,
-    clean: true,
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    dts: { sourcemap: false },
     minify: true,
-    treeshake: true,
+    sourcemap: false,
+    deps: {
+        neverBundle: ["react", "react-dom"],
+    },
 });

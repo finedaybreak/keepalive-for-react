@@ -6,7 +6,7 @@ import useOnDestroy from "./onDestory";
 function useOnCreate(cb: () => any, effect: typeof useEffect | typeof useLayoutEffect) {
     const isMount = useRef<boolean>(false);
     const destroyedRef = useRef<boolean>(false);
-    const { _cacheKey } = useKeepAliveContext();
+    const { cacheKey } = useKeepAliveContext();
     effect(() => {
         let destroyCb: any;
         if (isMount.current === false) {
@@ -18,7 +18,7 @@ function useOnCreate(cb: () => any, effect: typeof useEffect | typeof useLayoutE
                 destroyedRef.current = true;
                 destroyCb();
             }
-        }, _cacheKey);
+        }, cacheKey);
     }, []);
 }
 

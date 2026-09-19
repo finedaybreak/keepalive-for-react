@@ -9,12 +9,12 @@ export interface KeepAliveContext extends KeepAliveAPI {
     /**
      * the cache key of the component
      */
-    _cacheKey: string;
+    cacheKey: string;
 }
 
 export const CacheComponentContext = createContext<KeepAliveContext>({
     active: false,
-    _cacheKey: "",
+    cacheKey: "",
     refresh: () => {},
     destroy: () => Promise.resolve(),
     destroyAll: () => Promise.resolve(),

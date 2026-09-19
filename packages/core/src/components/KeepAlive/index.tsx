@@ -18,6 +18,11 @@ import eventBus from "../../event";
 
 export type KeepAliveChildren = ReactNode | ReactElement | null | undefined;
 
+const defaultCustomClassNames = {
+    active: "active",
+    inactive: "inactive",
+};
+
 export interface KeepAliveProps {
     activeCacheKey: string;
     children?: KeepAliveChildren;
@@ -65,6 +70,15 @@ export interface KeepAliveProps {
      * Attention: if enable Activity component, useEffect will trigger when the component is active
      */
     enableActivity?: boolean;
+
+    /**
+     * custom class names for the active and inactive states
+     * @default { active: "active", inactive: "inactive" }
+     */
+    customClassNames?: {
+        active?: string;
+        inactive?: string;
+    };
 }
 
 interface MaxAliveConfig {
@@ -129,10 +143,13 @@ function KeepAlive(props: KeepAliveProps) {
         aliveRef,
         maxAliveTime = 0,
         enableActivity = false,
+        customClassNames,
     } = props;
 
     const containerDivRef = customContainerRef || useRef<HTMLDivElement>(null);
     const [cacheNodes, setCacheNodes] = useState<Array<CacheNode>>([]);
+
+    const { active: activeClassName, inactive: inactiveClassName } = { ...defaultCustomClassNames, ...customClassNames };
 
     useLayoutEffect(() => {
         if (isNil(activeCacheKey)) return;
@@ -271,7 +288,7 @@ function KeepAlive(props: KeepAliveProps) {
                         destroyAll={destroyAll}
                         destroyOther={destroyOther}
                         getCacheNodes={getCacheNodes}
-                        _cacheKey={cacheKey}
+                        cacheKey={cacheKey}
                     >
                         <CacheComponent
                             destroy={destroy}
@@ -287,6 +304,8 @@ function KeepAlive(props: KeepAliveProps) {
                             cacheNodeClassName={cacheNodeClassName}
                             cacheKey={cacheKey}
                             enableActivity={enableActivity}
+                            activeClassName={activeClassName}
+                            inactiveClassName={inactiveClassName}
                         >
                             {ele}
                         </CacheComponent>

@@ -21,6 +21,8 @@ export interface CacheComponentProps {
     include?: Array<string | RegExp> | string | RegExp;
     destroy: (cacheKey: string | string[]) => Promise<void>;
     enableActivity: boolean;
+    activeClassName: string;
+    inactiveClassName: string;
 }
 
 const cacheDivMarkedClassName = "keepalive-cache-div";
@@ -37,20 +39,20 @@ function removeDivNodes(nodes: Element[]) {
     });
 }
 
-function renderCacheDiv(containerDiv: HTMLDivElement, cacheDiv: HTMLDivElement) {
+function renderCacheDiv(containerDiv: HTMLDivElement, cacheDiv: HTMLDivElement, activeClassName: string, inactiveClassName: string) {
     const removeNodes = getChildNodes(containerDiv);
     removeDivNodes(removeNodes);
     containerDiv.appendChild(cacheDiv);
-    cacheDiv.classList.remove("inactive");
-    cacheDiv.classList.add("active");
+    cacheDiv.classList.remove(inactiveClassName);
+    cacheDiv.classList.add(activeClassName);
 }
 
-function switchActiveNodesToInactive(containerDiv: HTMLDivElement, cacheKey: string) {
+function switchActiveNodesToInactive(containerDiv: HTMLDivElement, cacheKey: string, activeClassName: string, inactiveClassName: string) {
     const nodes = getChildNodes(containerDiv);
-    const activeNodes = nodes.filter(node => node.classList.contains("active") && node.getAttribute("data-cache-key") !== cacheKey);
+    const activeNodes = nodes.filter(node => node.classList.contains(activeClassName) && node.getAttribute("data-cache-key") !== cacheKey);
     activeNodes.forEach(node => {
-        node.classList.remove("active");
-        node.classList.add("inactive");
+        node.classList.remove(activeClassName);
+        node.classList.add(inactiveClassName);
     });
     return activeNodes;
 }
@@ -74,6 +76,7 @@ const CacheComponent = memo(
     function (props: CacheComponentProps): any {
         const { errorElement: ErrorBoundary = Fragment, cacheNodeClassName, children, cacheKey, exclude, include, enableActivity } = props;
         const { active, renderCount, destroy, transition, viewTransition, duration, containerDivRef } = props;
+        const { activeClassName, inactiveClassName } = props;
         const activatedRef = useRef(false);
 
         activatedRef.current = activatedRef.current || active;
@@ -98,14 +101,14 @@ const CacheComponent = memo(
             if (transition) {
                 (async () => {
                     if (active) {
-                        const inactiveNodes = switchActiveNodesToInactive(containerDiv, cacheKey);
+                        const inactiveNodes = switchActiveNodesToInactive(containerDiv, cacheKey, activeClassName, inactiveClassName);
                         // duration - 40ms is to avoid the animation effect ending too early
                         await delayAsync(duration - 40);
                         removeDivNodes(inactiveNodes);
                         if (containerDiv.contains(cacheDiv)) {
                             return;
                         }
-                        renderCacheDiv(containerDiv, cacheDiv);
+                        renderCacheDiv(containerDiv, cacheDiv, activeClassName, inactiveClassName);
                     } else {
                         if (!cached) {
                             await delayAsync(duration);
@@ -116,12 +119,12 @@ const CacheComponent = memo(
             } else {
                 if (active) {
                     const makeChange = () => {
-                        const inactiveNodes = switchActiveNodesToInactive(containerDiv, cacheKey);
+                        const inactiveNodes = switchActiveNodesToInactive(containerDiv, cacheKey, activeClassName, inactiveClassName);
                         removeDivNodes(inactiveNodes);
                         if (containerDiv.contains(cacheDiv)) {
                             return;
                         }
-                        renderCacheDiv(containerDiv, cacheDiv);
+                        renderCacheDiv(containerDiv, cacheDiv, activeClassName, inactiveClassName);
                     };
                     if (viewTransition && (document as any).startViewTransition) {
                         (document as any).startViewTransition(makeChange);

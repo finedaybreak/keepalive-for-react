@@ -357,7 +357,18 @@ interface KeepAliveRef {
     destroyAll: () => Promise<void>;
     destroyOther: (cacheKey?: string) => Promise<void>;
     getCacheNodes: () => Array<CacheNode>;
+    onCacheNodesChange: (callback: (cacheNodes: Array<CacheNode>) => void) => () => void;
 }
+```
+
+`onCacheNodesChange` subscribes to cache node additions, updates, refreshes, and removals, and returns an unsubscribe function. Multiple listeners are supported and notifications are scoped to each KeepAlive instance. Subscribing does not immediately invoke the callback; call `getCacheNodes()` if you need a snapshot of existing cache nodes. Subscribe in an effect and return the cleanup function:
+
+```tsx
+useEffect(() => {
+    return aliveRef.current?.onCacheNodesChange(nodes => {
+        console.log(nodes);
+    });
+}, [aliveRef]);
 ```
 
 ```tsx

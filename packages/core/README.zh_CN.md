@@ -355,7 +355,18 @@ interface KeepAliveRef {
     destroyAll: () => Promise<void>;
     destroyOther: (cacheKey?: string) => Promise<void>;
     getCacheNodes: () => Array<CacheNode>;
+    onCacheNodesChange: (callback: (cacheNodes: Array<CacheNode>) => void) => () => void;
 }
+```
+
+`onCacheNodesChange` 订阅缓存节点变化（新增、更新、刷新或删除），返回取消订阅函数。支持多个监听者，各 KeepAlive 实例独立通知。订阅时不会立即调用回调；如需读取已有缓存，可调用 `getCacheNodes()`。在 effect 中订阅并返回清理函数：
+
+```tsx
+useEffect(() => {
+    return aliveRef.current?.onCacheNodesChange(nodes => {
+        console.log(nodes);
+    });
+}, [aliveRef]);
 ```
 
 ```tsx

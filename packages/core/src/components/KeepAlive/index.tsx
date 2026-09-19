@@ -5,6 +5,7 @@ import {
     ReactNode,
     RefObject,
     useCallback,
+    useEffect,
     useImperativeHandle,
     useLayoutEffect,
     useRef,
@@ -119,7 +120,12 @@ export interface KeepAliveAPI {
     getCacheNodes: () => Array<CacheNode>;
 }
 
-export interface KeepAliveRef extends KeepAliveAPI {}
+export interface KeepAliveRef extends KeepAliveAPI {
+    /**
+     * 订阅缓存节点变化，返回取消订阅函数。订阅时不会立即触发回调。
+     */
+    onCacheNodesChange: (callback: (cacheNodes: Array<CacheNode>) => void) => () => void;
+}
 
 export function useKeepAliveRef() {
     return useRef<KeepAliveRef>(null);
@@ -148,6 +154,7 @@ function KeepAlive(props: KeepAliveProps) {
 
     const containerDivRef = customContainerRef || useRef<HTMLDivElement>(null);
     const [cacheNodes, setCacheNodes] = useState<Array<CacheNode>>([]);
+    const cacheNodesListenersRef = useRef(new Set<(cacheNodes: Array<CacheNode>) => void>());
 
     const { active: activeClassName, inactive: inactiveClassName } = { ...defaultCustomClassNames, ...customClassNames };
 
@@ -266,13 +273,31 @@ function KeepAlive(props: KeepAliveProps) {
         return cacheNodes;
     }, [cacheNodes]);
 
+    const onCacheNodesChange = useCallback((callback: (cacheNodes: Array<CacheNode>) => void) => {
+        const listeners = cacheNodesListenersRef.current;
+        listeners.add(callback);
+        return () => {
+            listeners.delete(callback);
+        };
+    }, []);
+
     useImperativeHandle(aliveRef, () => ({
         refresh,
         destroy,
         destroyAll,
         destroyOther,
         getCacheNodes,
+        onCacheNodesChange,
     }));
+
+    useEffect(() => {
+        cacheNodesListenersRef.current.forEach(callback => callback(cacheNodes));
+    }, [cacheNodes]);
+
+    useEffect(() => {
+        const listeners = cacheNodesListenersRef.current;
+        return () => listeners.clear();
+    }, []);
 
     return (
         <Fragment>

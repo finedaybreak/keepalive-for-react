@@ -23,27 +23,27 @@
 
 ## Features
 
--   Support react-router-dom v6+ or react-router v7+
--   Support React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
--   Support Suspense and Lazy import
--   Support ErrorBoundary
--   Support Custom Container
--   Support Switching Animation Transition with className `active` and `inactive`
--   Simply implement, without any extra dependencies and hacking ways
--   Only 6KB minified size
--   Support interrupt state effect when component is not active (v5.0.0)
+- Support react-router-dom v6+ or react-router v7+
+- Support React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
+- Support Suspense and Lazy import
+- Support ErrorBoundary
+- Support Custom Container
+- Support Switching Animation Transition with className `active` and `inactive`
+- Simply implement, without any extra dependencies and hacking ways
+- Only 6KB minified size
+- Support interrupt state effect when component is not active (v5.0.0)
 
 ## Attention
 
--   **Version Compatibility**:
+- **Version Compatibility**:
 
-    -   For React 18, please use `keepalive-for-react@4.x.x`
-    -   For React 19.2+, please use `keepalive-for-react@5.x.x`
+    - For React 18, please use `keepalive-for-react@4.x.x`
+    - For React 19.2+, please use `keepalive-for-react@5.x.x`
 
--   DO NOT use <React.StrictMode />, it CANNOT work with keepalive-for-react in development mode. because it can lead to
-    some unexpected behavior.
+- DO NOT use <React.StrictMode />, it CANNOT work with keepalive-for-react in development mode. because it can lead to
+  some unexpected behavior.
 
--   In Router only support react-router-dom v6+
+- In Router only support react-router-dom v6+
 
 ## Install
 
@@ -209,7 +209,7 @@ interface KeepAliveProps {
      * transition duration default 200
      */
     duration?: number;
-    aliveRef?: RefObject<KeepAliveRef | undefined>;
+    aliveRef?: RefObject<KeepAliveRef | undefined | null>;
     /**
      * max alive time for cache node (second)
      * @default 0 (no limit)
@@ -221,6 +221,10 @@ interface KeepAliveProps {
      * Attention: if enable Activity component, useEffect will trigger when the component is active
      */
     enableActivity?: boolean;
+    customClassNames?: {
+        active?: string;
+        inactive?: string;
+    };
 }
 
 interface MaxAliveConfig {
@@ -228,6 +232,18 @@ interface MaxAliveConfig {
     expire: number;
 }
 ```
+
+### Custom state class names
+
+`customClassNames` customizes the active and inactive class names on cache nodes. It defaults to `{ active: "active", inactive: "inactive" }`; omitted fields keep their defaults. Each value must be a single non-empty CSS class name.
+
+```tsx
+<KeepAlive activeCacheKey={currentTab} transition customClassNames={{ active: "tab-active", inactive: "tab-inactive" }}>
+    {children}
+</KeepAlive>
+```
+
+Update your transition CSS selectors to match the custom names. `cacheNodeClassName` sets the cache node's base class independently of these state classes.
 
 ## Hooks
 
@@ -290,13 +306,17 @@ interface KeepAliveContext {
      */
     active: boolean;
     /**
+     * The key of this component's cache node, which may differ from the active node's key.
+     */
+    cacheKey: string;
+    /**
      * refresh the component
      * @param {string} [cacheKey] - The cache key of the component. If not provided, the current cached component will be refreshed.
      */
     refresh: (cacheKey?: string) => void;
     /**
      * destroy the component
-     * @param {string} [cacheKey] - the cache key of the component, if not provided, current active cached component will be destroyed
+     * @param {string} [cacheKey] - the cache key of the component, if not provided, the cache node containing the calling component will be destroyed
      */
     destroy: (cacheKey?: string | string[]) => Promise<void>;
     /**
@@ -305,7 +325,7 @@ interface KeepAliveContext {
     destroyAll: () => Promise<void>;
     /**
      * destroy other components except the provided cacheKey
-     * @param {string} [cacheKey] - The cache key of the component. If not provided, destroy all components except the current active cached component.
+     * @param {string} [cacheKey] - The cache key of the component. If not provided, keep the cache node containing the calling component and destroy the others.
      */
     destroyOther: (cacheKey?: string) => Promise<void>;
     /**
@@ -316,7 +336,8 @@ interface KeepAliveContext {
 ```
 
 ```tsx
-const { active, refresh, destroy, getCacheNodes } = useKeepAliveContext();
+const { active, cacheKey, refresh, destroy, getCacheNodes } = useKeepAliveContext();
+// cacheKey identifies this component's cache node
 // active is a boolean, true is active, false is inactive
 // refresh is a function, you can call it to refresh the component
 // destroy is a function, you can call it to destroy the component

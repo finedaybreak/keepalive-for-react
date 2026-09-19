@@ -23,26 +23,26 @@
 
 ## 特性
 
--   支持react-router-dom v6+ 或 react-router v7+
--   支持React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
--   支持Suspense和懒加载导入
--   支持错误边界
--   支持自定义容器
--   支持使用className `active`和`inactive`进行切换动画过渡
--   简单实现,无需任何额外依赖和hack方式
--   压缩后仅6KB大小
--   支持中断state Effect当组件不活动时 (v5.0.0)
+- 支持react-router-dom v6+ 或 react-router v7+
+- 支持React v16+ ~ v18+ (v19.2 Activity component support [v5.0.0])
+- 支持Suspense和懒加载导入
+- 支持错误边界
+- 支持自定义容器
+- 支持使用className `active`和`inactive`进行切换动画过渡
+- 简单实现,无需任何额外依赖和hack方式
+- 压缩后仅6KB大小
+- 支持中断state Effect当组件不活动时 (v5.0.0)
 
 ## 注意事项
 
--   **版本兼容性**：
+- **版本兼容性**：
 
-    -   React 18 请使用 `keepalive-for-react@4.x.x`
-    -   React 19.2+ 请使用 `keepalive-for-react@5.x.x`
+    - React 18 请使用 `keepalive-for-react@4.x.x`
+    - React 19.2+ 请使用 `keepalive-for-react@5.x.x`
 
--   请勿使用 <React.StrictMode />,它在开发模式下无法与keepalive-for-react一起工作。因为它可能会导致一些意外行为。
+- 请勿使用 <React.StrictMode />,它在开发模式下无法与keepalive-for-react一起工作。因为它可能会导致一些意外行为。
 
--   在路由中仅支持react-router-dom v6+
+- 在路由中仅支持react-router-dom v6+
 
 ## 安装
 
@@ -207,7 +207,7 @@ interface KeepAliveProps {
      * 过渡时间 默认200ms
      */
     duration?: number;
-    aliveRef?: RefObject<KeepAliveRef | undefined>;
+    aliveRef?: RefObject<KeepAliveRef | undefined | null>;
     /**
      * 缓存节点最大存活时间 (秒)
      * @default 0 (无限制)
@@ -220,6 +220,10 @@ interface KeepAliveProps {
      * Attention: if enable Activity component, useEffect will trigger when the component is active
      */
     enableActivity?: boolean;
+    customClassNames?: {
+        active?: string;
+        inactive?: string;
+    };
 }
 
 interface MaxAliveConfig {
@@ -227,6 +231,18 @@ interface MaxAliveConfig {
     expire: number;
 }
 ```
+
+### 自定义状态类名
+
+`customClassNames` 用于自定义缓存节点的激活和非激活状态类名，默认值为 `{ active: "active", inactive: "inactive" }`。可以只指定其中一个字段，未指定的字段沿用默认值。每个值应为单个非空 CSS 类名。
+
+```tsx
+<KeepAlive activeCacheKey={currentTab} transition customClassNames={{ active: "tab-active", inactive: "tab-inactive" }}>
+    {children}
+</KeepAlive>
+```
+
+自定义类名后，过渡样式中的选择器也需要使用对应名称。`cacheNodeClassName` 用于设置缓存节点的基础类名，与状态类名独立。
 
 ## Hooks
 
@@ -289,13 +305,17 @@ interface KeepAliveContext {
      */
     active: boolean;
     /**
+     * 当前组件所属缓存节点的键（不一定是当前激活节点的键）
+     */
+    cacheKey: string;
+    /**
      * 刷新组件
      * @param {string} [cacheKey] - 组件的缓存键。如果未提供，将刷新当前缓存的组件。
      */
     refresh: (cacheKey?: string) => void;
     /**
      * 销毁组件
-     * @param {string} [cacheKey] - 组件的缓存键，如果未提供，将销毁当前活动的缓存组件。
+     * @param {string} [cacheKey] - 组件的缓存键，如果未提供，将销毁调用此 Hook 的组件所属缓存节点。
      */
     destroy: (cacheKey?: string | string[]) => Promise<void>;
     /**
@@ -304,7 +324,7 @@ interface KeepAliveContext {
     destroyAll: () => Promise<void>;
     /**
      * 销毁除提供的cacheKey外的其他组件
-     * @param {string} [cacheKey] - 组件的缓存键。如果未提供，将销毁除当前活动缓存组件外的所有组件。
+     * @param {string} [cacheKey] - 组件的缓存键。如果未提供，将保留调用此 Hook 的组件所属缓存节点，销毁其他节点。
      */
     destroyOther: (cacheKey?: string) => Promise<void>;
     /**
@@ -315,7 +335,8 @@ interface KeepAliveContext {
 ```
 
 ```tsx
-const { active, refresh, destroy, getCacheNodes } = useKeepAliveContext();
+const { active, cacheKey, refresh, destroy, getCacheNodes } = useKeepAliveContext();
+// cacheKey 是当前组件所属缓存节点的键
 // active 是一个布尔值，true表示活动，false表示非活动
 // refresh 是一个函数，你可以调用它来刷新组件
 // destroy 是一个函数，你可以调用它来销毁组件
